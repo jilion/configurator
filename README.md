@@ -95,7 +95,7 @@ production:
   bar: env_bar
 ```
 
-This will automatically load `ENV['FOO_BAR']` variable. Handy!
+This will automatically load `ENV['BAR']` variable. Handy!
 
 ## Contributing
 
