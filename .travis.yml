@@ -1,0 +1,15 @@
+language: ruby
+bundler_args: --without development:tools
+rvm:
+  - 1.9.3
+  - ruby-head
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+branches:
+  only:
+    - master
+notifications:
+  recipients:
+    - thibaud@thibaud.me
+    - rymai@rymai.me
