@@ -25,35 +25,40 @@ module Configurator
       method_name = args.shift.to_sym
 
       if @config_attributes && @config_attributes.include?(method_name)
-        yml_options[method_name] == 'env_var' ? ENV["#{@prefix}_#{method_name.to_s.upcase}"] : yml_options[method_name]
+        yaml_options[method_name] == 'env_var' ? ENV["#{@prefix}_#{method_name.to_s.upcase}"] : yaml_options[method_name]
       else
-        yml_options[method_name].nil? ? super(method_name, *args) : yml_options[method_name]
+        if yaml_options[method_name].nil?
+          super(method_name, *args)
+        else
+          Rails.logger.info "[DEPRECATION] Please add :#{method_name} to the 'config_accessor' list."
+          yaml_options[method_name]
+        end
       end
     end
 
     def respond_to?(*args)
       method_name = args.shift.to_sym
 
-      (@config_attributes || []).include?(method_name) || yml_options[method_name] || super(method_name, args)
+      (@config_attributes || []).include?(method_name) || yaml_options[method_name] || super(method_name, args)
     end
 
-    def yml_options
+    def yaml_options
       if Rails.env == 'test'
-        calculate_yml_options
+        load_config_from_yaml_file
       else
-        @yml_options ||= calculate_yml_options
+        @yaml_options ||= load_config_from_yaml_file
       end
     end
 
     private
 
-    def calculate_yml_options
-      yml_hash = if @config_file_options[:rails_env]
+    def load_config_from_yaml_file
+      hash = if @config_file_options[:rails_env]
         YAML.load_file(@config_path)[Rails.env.to_s]
       else
         YAML.load_file(@config_path)
       end
-      HashWithIndifferentAccess.new(yml_hash)
+      HashWithIndifferentAccess.new(hash)
     end
 
   end

@@ -3,6 +3,9 @@ require 'spec_helper'
 require 'configurator'
 
 describe Configurator do
+  before do
+    Rails.stub_chain(:logger, :info) { |*args| puts *args }
+  end
 
   context "with Rails Env" do
     let(:conf_with_rails_env) { {
@@ -32,13 +35,12 @@ describe Configurator do
 
       its(:config_path) { should eq Rails.root.join('config', 'configurable_module.yml') }
       its(:prefix)      { should eq 'CONFIGURABLE_MODULE' }
-      its(:yml_options) { should eq conf_with_rails_env['development'] }
     end
 
     describe "config_accessor" do
       context "config file exists" do
         before do
-          ConfigurableModule.instance_variable_set(:@yml_options, nil) # avoid memoization
+          ConfigurableModule.instance_variable_set(:@yaml_options, nil) # avoid memoization
           YAML.stub(:load_file).with(ConfigurableModule.config_path) { conf_with_rails_env }
         end
         after { Rails.stub(:env) { 'test' } }
