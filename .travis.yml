@@ -1,5 +1,5 @@
 language: ruby
-bundler_args: --without development:tools
+bundler_args: --without tools
 rvm:
   - 1.9.3
   - ruby-head
