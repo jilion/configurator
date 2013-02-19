@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jilion"]
   spec.email         = ["info@jilion.com"]
   spec.homepage      = "http://jilion.com"
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Simple yaml config loader for Ruby Class (using ActiveSupport::Concern)"
+  spec.summary       = "Simple yaml config loader for Ruby Class"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
