@@ -1,4 +1,4 @@
-# Configurator [![Build Status](https://travis-ci.org/jilion/configurator.png?branch=master)](https://travis-ci.org/jilion/configurator)
+# Configurator [![Build Status](https://travis-ci.org/jilion/configurator.png?branch=master)](https://travis-ci.org/jilion/configurator) [![Code Climate](https://codeclimate.com/github/jilion/configurator.png)](https://codeclimate.com/github/jilion/configurator)
 
 Simple yaml config loader for Ruby Class (using ActiveSupport::Concern)
 
