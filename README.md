@@ -1,4 +1,4 @@
-# Configurator
+# Configurator [![Build Status](https://travis-ci.org/jilion/configurator.png?branch=master)](https://travis-ci.org/jilion/configurator)
 
 TODO: Write a gem description
 
